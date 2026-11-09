@@ -133,6 +133,29 @@
       margin: 18px 0 20px;
     }
 
+.action-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
+
+.action-button img {
+    width: 100%;
+    max-width: 230px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.action-button:hover {
+    transform: scale(1.05);
+}
+    
     .action-button {
       min-height: 66px;
       display: flex;
@@ -302,23 +325,20 @@
       <a
         class="action-button whatsapp"
         href="https://wa.me/5514996199242?text=Ol%C3%A1!%20Recebi%20o%20convite%20da%20Helo%C3%ADsa%20e%20gostaria%20de%20confirmar%20minha%20presen%C3%A7a%20na%20festa%20de%205%20anos!%20%F0%9F%8E%80"
+        class="action-button"
         target="_blank"
-        rel="noopener noreferrer"
-        id="confirmButton"
-      >
-        <span class="symbol" aria-hidden="true">💬</span>
-        <span>Confirmar presença</span>
-      </a>
+         <img src="assets/images/botao-confirmar.png"
+         alt="Confirmar presença">
+</a>
 
       <a
         class="action-button location"
         href="https://www.google.com/maps/search/?api=1&query=Gulas+Kids+Buffet%2C+Avenida+Pinheiro+Machado+1-65%2C+Bauru%2C+SP"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span class="symbol" aria-hidden="true">📍</span>
-        <span>Ver localização</span>
-      </a>
+        class="action-button"
+        target="_blank">
+    <img src="assets/images/botao-localizacao.png"
+         alt="Ver localização">
+</a>
     </nav>
 
 
