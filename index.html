@@ -40,26 +40,8 @@
     .page { width: 100%; max-width: 560px; }
 
     .intro {
-    isolation: isolate;
-    overflow: hidden;
-}
-
-    .intro::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background-image: url("assets/images/heloisa-fundo.jpg");
-    background-size: cover;
-    background-position: center 30%;
-    background-repeat: no-repeat;
-
-    opacity: 0.50;
-    z-index: -1;
-    pointer-events: none;
-}    
-    
-    .intro {
+      isolation: isolate;
+      overflow: hidden;
       position: fixed;
       inset: 0;
       z-index: 20;
@@ -73,6 +55,19 @@
         radial-gradient(circle at 80% 75%, rgba(255,255,255,.55), transparent 28%),
         linear-gradient(145deg, #f9a8d4, #ec4899 55%, #be185d);
       transition: opacity .7s ease, visibility .7s ease;
+    }
+
+    .intro::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("assets/images/heloisa-fundo.jpg");
+      background-size: cover;
+      background-position: center 30%;
+      background-repeat: no-repeat;
+      opacity: 0.50;
+      z-index: -1;
+      pointer-events: none;
     }
 
     .intro.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
@@ -133,52 +128,28 @@
       margin: 18px 0 20px;
     }
 
-.action-button {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    transition: transform 0.25s ease;
-}
-
-.action-button img {
-    width: 100%;
-    max-width: 230px;
-    height: auto;
-    display: block;
-    object-fit: contain;
-}
-
-.action-button:hover {
-    transform: scale(1.05);
-}
-    
     .action-button {
-      min-height: 66px;
-      display: flex;
-      align-items: center;
+      display: inline-flex;
       justify-content: center;
-      gap: 9px;
-      padding: 13px 12px;
-      border: 2px solid rgba(255,255,255,.9);
-      border-radius: 19px;
-      color: white;
+      align-items: center;
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
       text-decoration: none;
-      text-align: center;
-      font-size: 15px;
-      line-height: 1.2;
-      font-weight: 800;
-      box-shadow: 0 7px 18px rgba(125, 20, 73, .18);
-      transition: transform .2s ease, filter .2s ease;
+      transition: transform 0.25s ease, filter 0.2s ease;
     }
-    .action-button:hover { transform: translateY(-3px); filter: brightness(1.04); }
+
+    .action-button img {
+      width: 100%;
+      max-width: 230px;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .action-button:hover { transform: translateY(-3px) scale(1.03); filter: brightness(1.04); }
     .action-button:active { transform: scale(.98); }
-    .action-button .symbol { font-size: 23px; flex: 0 0 auto; }
-    .whatsapp { background: linear-gradient(135deg, #20c96b, #0d9e50); }
-    .location { background: linear-gradient(135deg, #f05a9a, #c51d69); }
 
     .countdown-card {
       padding: 20px 15px;
@@ -217,7 +188,6 @@
       letter-spacing: 0;
       font-variant-numeric: tabular-nums;
     }
-
 
     .gift-card {
       margin: 0 0 20px;
@@ -286,7 +256,6 @@
     @media (max-width: 390px) {
       body { padding: 10px 8px 28px; }
       .actions { gap: 8px; }
-      .action-button { min-height: 62px; padding: 10px 7px; font-size: 13px; }
       .countdown { gap: 5px; }
       .time-box { padding: 10px 3px; }
     }
@@ -298,8 +267,7 @@
 </head>
 
 <body>
-  <!-- Tela inicial: a música só é iniciada depois do toque do convidado,
-       respeitando o bloqueio de reprodução automática dos navegadores. -->
+  <!-- Tela inicial -->
   <section class="intro" id="intro">
     <div class="intro-card">
       <div class="intro-bow">🎀</div>
@@ -313,36 +281,34 @@
   </section>
 
   <main class="page invite" id="invite" aria-label="Convite de aniversário da Heloísa">
-    <!-- Coloque a arte final, sem botões e sem contador, neste caminho. -->
     <img
       class="invite-art"
       src="assets/images/convite-heloisa.png"
       alt="Convite Barbie moderno dos 5 anos da Heloísa"
     >
 
-    <!-- Os dois botões são HTML, separados da imagem. -->
+    <!-- Botões corrigidos com a imagem devidamente dentro de cada tag <a> -->
     <nav class="actions" aria-label="Ações do convite">
       <a
         class="action-button whatsapp"
         href="https://wa.me/5514996199242?text=Ol%C3%A1!%20Recebi%20o%20convite%20da%20Helo%C3%ADsa%20e%20gostaria%20de%20confirmar%20minha%20presen%C3%A7a%20na%20festa%20de%205%20anos!%20%F0%9F%8E%80"
-        class="action-button"
         target="_blank"
-         <img src="assets/images/botao-confirmar.png"
-         alt="Confirmar presença">
-</a>
+        rel="noopener noreferrer"
+      >
+        <img src="assets/images/botao-confirmar.png" alt="Confirmar presença">
+      </a>
 
       <a
         class="action-button location"
         href="https://www.google.com/maps/search/?api=1&query=Gulas+Kids+Buffet%2C+Avenida+Pinheiro+Machado+1-65%2C+Bauru%2C+SP"
-        class="action-button"
-        target="_blank">
-    <img src="assets/images/botao-localizacao.png"
-         alt="Ver localização">
-</a>
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src="assets/images/botao-localizacao.png" alt="Ver localização">
+      </a>
     </nav>
 
-
-    <!-- Sugestão de presentes: cartão independente da arte principal. -->
+    <!-- Sugestão de presentes -->
     <section class="gift-card" aria-label="Sugestão de presentes">
       <h2>🎁 Sugestão de presentes</h2>
       <p>Sua presença é o nosso maior presente! Mas, se desejar presentear a Heloísa, seguem algumas sugestões:</p>
@@ -361,7 +327,7 @@
       <p class="gift-signature">Com carinho, Heloísa! 🎀</p>
     </section>
 
-    <!-- Contador independente da arte: pode ser estilizado ou reposicionado no HTML/CSS. -->
+    <!-- Contador -->
     <section class="countdown-card" aria-label="Contagem regressiva para a festa">
       <h2>✨ Falta pouco para nossa festa! ✨</h2>
       <div class="countdown">
@@ -376,7 +342,6 @@
   </main>
 
   <audio id="musica" loop preload="auto">
-    <!-- Substitua pelo nome do arquivo de música que você adicionar ao projeto. -->
     <source src="assets/audio/musica.mp3" type="audio/mpeg">
   </audio>
 
@@ -391,7 +356,6 @@
     const musica = document.getElementById("musica");
     const musicButton = document.getElementById("musicButton");
 
-    // Abre o convite e tenta iniciar a música após o toque do visitante.
     enterButton.addEventListener("click", async () => {
       intro.classList.add("hidden");
       invite.classList.add("visible");
@@ -402,8 +366,6 @@
         musicButton.textContent = "🔊";
         musicButton.setAttribute("aria-label", "Pausar música");
       } catch (error) {
-        // Se o arquivo ainda não existir ou o navegador bloquear o áudio,
-        // o convite continua funcionando e o visitante pode tentar pelo botão.
         musicButton.textContent = "🔇";
         musicButton.setAttribute("aria-label", "Tocar música");
         console.warn("Não foi possível iniciar a música:", error);
@@ -420,7 +382,6 @@
       }
     });
 
-    // Controle manual da música.
     musicButton.addEventListener("click", async () => {
       if (musica.paused) {
         try {
@@ -437,7 +398,6 @@
       }
     });
 
-    // Data e horário local de Bauru: 15/12/2026 às 19h30 (UTC-3).
     const dataFesta = new Date("2026-12-15T19:30:00-03:00").getTime();
 
     function atualizarContagem() {
