@@ -39,12 +39,12 @@
 
     .page { width: 100%; max-width: 560px; }
 
-.intro {
+    .intro {
     isolation: isolate;
     overflow: hidden;
 }
 
-.intro::before {
+    .intro::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -195,6 +195,46 @@
       font-variant-numeric: tabular-nums;
     }
 
+
+    .gift-card {
+      margin: 0 0 20px;
+      padding: 20px 16px 17px;
+      border: 1px solid rgba(214,166,77,.65);
+      border-radius: 23px;
+      text-align: center;
+      background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(255,240,247,.96));
+      box-shadow: 0 8px 24px rgba(125, 20, 73, .10);
+    }
+    .gift-card h2 {
+      margin: 0 0 9px;
+      color: var(--pink-dark);
+      font-family: Georgia, serif;
+      font-size: 22px;
+    }
+    .gift-card p {
+      max-width: 420px;
+      margin: 0 auto 15px;
+      color: #8f3b64;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .gift-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .gift-option {
+      padding: 13px 8px;
+      border: 1px solid rgba(232,50,131,.13);
+      border-radius: 17px;
+      background: #fff;
+      color: var(--text);
+    }
+    .gift-option .gift-icon { display: block; margin-bottom: 5px; font-size: 25px; }
+    .gift-option strong { display: block; margin-bottom: 3px; font-size: 13px; }
+    .gift-option span:last-child { color: var(--pink-dark); font-size: 19px; font-weight: 900; }
+    .gift-signature { margin: 13px 0 0 !important; color: #b14b7c !important; font-family: Georgia, serif; font-style: italic; }
+
     .footer {
       margin: 18px 8px 0;
       text-align: center;
@@ -281,6 +321,7 @@
       </a>
     </nav>
 
+
     <!-- Sugestão de presentes: cartão independente da arte principal. -->
     <section class="gift-card" aria-label="Sugestão de presentes">
       <h2>🎁 Sugestão de presentes</h2>
@@ -299,7 +340,7 @@
       </div>
       <p class="gift-signature">Com carinho, Heloísa! 🎀</p>
     </section>
-    
+
     <!-- Contador independente da arte: pode ser estilizado ou reposicionado no HTML/CSS. -->
     <section class="countdown-card" aria-label="Contagem regressiva para a festa">
       <h2>✨ Falta pouco para nossa festa! ✨</h2>
