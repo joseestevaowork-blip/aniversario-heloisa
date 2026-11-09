@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ec4899">
+  <meta name="description" content="Convite especial para os 5 anos da Heloísa!">
+  <title>Heloísa — 5 anos! 🎀</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --pink: #e83283;
+      --pink-dark: #b91461;
+      --pink-soft: #fff0f7;
+      --gold: #d6a64d;
+      --text: #7e1748;
+      --shadow: 0 14px 35px rgba(125, 20, 73, .17);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 18px 12px 35px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255,255,255,.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 88% 22%, rgba(255,255,255,.75) 0 2px, transparent 3px),
+        linear-gradient(145deg, #ffe5f1 0%, #ffd0e6 45%, #fff2f8 100%);
+      background-size: 90px 90px, 120px 120px, auto;
+    }
+
+    .page { width: 100%; max-width: 560px; }
+
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.65), transparent 25%),
+        radial-gradient(circle at 80% 75%, rgba(255,255,255,.55), transparent 28%),
+        linear-gradient(145deg, #f9a8d4, #ec4899 55%, #be185d);
+      transition: opacity .7s ease, visibility .7s ease;
+    }
+
+    .intro.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .intro-card {
+      width: min(100%, 430px);
+      padding: 38px 25px;
+      border: 2px solid rgba(255,255,255,.85);
+      border-radius: 30px;
+      color: white;
+      background: rgba(255,255,255,.14);
+      box-shadow: 0 20px 60px rgba(102, 10, 56, .22);
+      backdrop-filter: blur(8px);
+    }
+
+    .intro-bow { font-size: 52px; line-height: 1.2; }
+    .intro-kicker { margin: 12px 0 4px; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; }
+    .intro h1 {
+      margin: 4px 0 8px;
+      font-family: Georgia, serif;
+      font-size: clamp(42px, 11vw, 62px);
+      font-weight: 700;
+      text-shadow: 0 3px 0 rgba(153, 12, 77, .22);
+    }
+    .intro-age { margin: 0 0 24px; font-size: 23px; font-weight: 700; }
+
+    .enter-button {
+      border: 2px solid #fff4fa;
+      border-radius: 999px;
+      padding: 15px 25px;
+      color: var(--pink-dark);
+      background: linear-gradient(180deg, #fff, #ffe6f2);
+      box-shadow: 0 8px 22px rgba(103, 9, 55, .22);
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .2s ease;
+    }
+    .enter-button:hover { transform: translateY(-2px) scale(1.02); }
+
+    .invite { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+    .invite.visible { opacity: 1; transform: translateY(0); }
+
+    .invite-art {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 3px solid rgba(255,255,255,.9);
+      border-radius: 25px;
+      box-shadow: var(--shadow);
+      background: #f9a8d4;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 18px 0 20px;
+    }
+
+    .action-button {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 13px 12px;
+      border: 2px solid rgba(255,255,255,.9);
+      border-radius: 19px;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.2;
+      font-weight: 800;
+      box-shadow: 0 7px 18px rgba(125, 20, 73, .18);
+      transition: transform .2s ease, filter .2s ease;
+    }
+    .action-button:hover { transform: translateY(-3px); filter: brightness(1.04); }
+    .action-button:active { transform: scale(.98); }
+    .action-button .symbol { font-size: 23px; flex: 0 0 auto; }
+    .whatsapp { background: linear-gradient(135deg, #20c96b, #0d9e50); }
+    .location { background: linear-gradient(135deg, #f05a9a, #c51d69); }
+
+    .countdown-card {
+      padding: 20px 15px;
+      border: 1px solid rgba(214,166,77,.65);
+      border-radius: 23px;
+      text-align: center;
+      background: rgba(255,255,255,.76);
+      box-shadow: 0 8px 24px rgba(125, 20, 73, .10);
+    }
+    .countdown-card h2 {
+      margin: 0 0 15px;
+      color: var(--pink-dark);
+      font-family: Georgia, serif;
+      font-size: clamp(19px, 5vw, 24px);
+    }
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .time-box {
+      padding: 11px 5px;
+      border-radius: 15px;
+      color: white;
+      background: linear-gradient(160deg, #f06aa5, #c51d69);
+      box-shadow: 0 5px 12px rgba(125, 20, 73, .13);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .time-box span {
+      display: block;
+      margin-bottom: 3px;
+      font-size: clamp(21px, 6vw, 29px);
+      font-weight: 900;
+      letter-spacing: 0;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .footer {
+      margin: 18px 8px 0;
+      text-align: center;
+      color: #9b3b69;
+      font-family: Georgia, serif;
+      font-size: 15px;
+      font-style: italic;
+    }
+
+    .music-button {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 10;
+      width: 54px;
+      height: 54px;
+      border: 2px solid white;
+      border-radius: 50%;
+      color: white;
+      background: linear-gradient(145deg, #f05a9a, #bd1763);
+      box-shadow: 0 6px 20px rgba(125, 20, 73, .25);
+      font-size: 23px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 390px) {
+      body { padding: 10px 8px 28px; }
+      .actions { gap: 8px; }
+      .action-button { min-height: 62px; padding: 10px 7px; font-size: 13px; }
+      .countdown { gap: 5px; }
+      .time-box { padding: 10px 3px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Tela inicial: a música só é iniciada depois do toque do convidado,
+       respeitando o bloqueio de reprodução automática dos navegadores. -->
+  <section class="intro" id="intro">
+    <div class="intro-card">
+      <div class="intro-bow">🎀</div>
+      <p class="intro-kicker">Você recebeu um convite especial</p>
+      <h1>Heloísa</h1>
+      <p class="intro-age">5 anos de encanto! ✨</p>
+      <button class="enter-button" id="enterButton" type="button">
+        💗 Toque para abrir o convite
+      </button>
+    </div>
+  </section>
+
+  <main class="page invite" id="invite" aria-label="Convite de aniversário da Heloísa">
+    <!-- Coloque a arte final, sem botões e sem contador, neste caminho. -->
+    <img
+      class="invite-art"
+      src="assets/images/convite-heloisa.png"
+      alt="Convite Barbie moderno dos 5 anos da Heloísa"
+    >
+
+    <!-- Os dois botões são HTML, separados da imagem. -->
+    <nav class="actions" aria-label="Ações do convite">
+      <a
+        class="action-button whatsapp"
+        href="https://wa.me/5514996199242?text=Ol%C3%A1!%20Recebi%20o%20convite%20da%20Helo%C3%ADsa%20e%20gostaria%20de%20confirmar%20minha%20presen%C3%A7a%20na%20festa%20de%205%20anos!%20%F0%9F%8E%80"
+        target="_blank"
+        rel="noopener noreferrer"
+        id="confirmButton"
+      >
+        <span class="symbol" aria-hidden="true">💬</span>
+        <span>Confirmar presença</span>
+      </a>
+
+      <a
+        class="action-button location"
+        href="https://www.google.com/maps/search/?api=1&query=Gulas+Kids+Buffet%2C+Avenida+Pinheiro+Machado+1-65%2C+Bauru%2C+SP"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="symbol" aria-hidden="true">📍</span>
+        <span>Ver localização</span>
+      </a>
+    </nav>
+
+    <!-- Contador independente da arte: pode ser estilizado ou reposicionado no HTML/CSS. -->
+    <section class="countdown-card" aria-label="Contagem regressiva para a festa">
+      <h2>✨ Falta pouco para nossa festa! ✨</h2>
+      <div class="countdown">
+        <div class="time-box"><span id="dias">0</span>Dias</div>
+        <div class="time-box"><span id="horas">0</span>Horas</div>
+        <div class="time-box"><span id="minutos">0</span>Minutos</div>
+        <div class="time-box"><span id="segundos">0</span>Segundos</div>
+      </div>
+    </section>
+
+    <p class="footer">Será uma alegria ter você comemorando comigo! 💕</p>
+  </main>
+
+  <audio id="musica" loop preload="auto">
+    <!-- Substitua pelo nome do arquivo de música que você adicionar ao projeto. -->
+    <source src="assets/audio/musica.mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="music-button" id="musicButton" type="button" aria-label="Pausar música" title="Pausar ou tocar música" hidden>
+    🔊
+  </button>
+
+  <script>
+    const intro = document.getElementById("intro");
+    const invite = document.getElementById("invite");
+    const enterButton = document.getElementById("enterButton");
+    const musica = document.getElementById("musica");
+    const musicButton = document.getElementById("musicButton");
+
+    // Abre o convite e tenta iniciar a música após o toque do visitante.
+    enterButton.addEventListener("click", async () => {
+      intro.classList.add("hidden");
+      invite.classList.add("visible");
+      musicButton.hidden = false;
+
+      try {
+        await musica.play();
+        musicButton.textContent = "🔊";
+        musicButton.setAttribute("aria-label", "Pausar música");
+      } catch (error) {
+        // Se o arquivo ainda não existir ou o navegador bloquear o áudio,
+        // o convite continua funcionando e o visitante pode tentar pelo botão.
+        musicButton.textContent = "🔇";
+        musicButton.setAttribute("aria-label", "Tocar música");
+        console.warn("Não foi possível iniciar a música:", error);
+      }
+
+      if (typeof confetti === "function") {
+        confetti({
+          particleCount: 150,
+          spread: 100,
+          startVelocity: 35,
+          origin: { y: 0.65 },
+          colors: ["#ec4899", "#f9a8d4", "#ffffff", "#d6a64d"]
+        });
+      }
+    });
+
+    // Controle manual da música.
+    musicButton.addEventListener("click", async () => {
+      if (musica.paused) {
+        try {
+          await musica.play();
+          musicButton.textContent = "🔊";
+          musicButton.setAttribute("aria-label", "Pausar música");
+        } catch (error) {
+          console.warn("Não foi possível tocar a música:", error);
+        }
+      } else {
+        musica.pause();
+        musicButton.textContent = "🔇";
+        musicButton.setAttribute("aria-label", "Tocar música");
+      }
+    });
+
+    // Data e horário local de Bauru: 15/12/2026 às 19h30 (UTC-3).
+    const dataFesta = new Date("2026-12-15T19:30:00-03:00").getTime();
+
+    function atualizarContagem() {
+      const agora = Date.now();
+      const diferenca = dataFesta - agora;
+
+      if (diferenca <= 0) {
+        document.getElementById("dias").textContent = "0";
+        document.getElementById("horas").textContent = "0";
+        document.getElementById("minutos").textContent = "0";
+        document.getElementById("segundos").textContent = "0";
+        return;
+      }
+
+      const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
+      const minutos = Math.floor((diferenca / (1000 * 60)) % 60);
+      const segundos = Math.floor((diferenca / 1000) % 60);
+
+      document.getElementById("dias").textContent = dias;
+      document.getElementById("horas").textContent = String(horas).padStart(2, "0");
+      document.getElementById("minutos").textContent = String(minutos).padStart(2, "0");
+      document.getElementById("segundos").textContent = String(segundos).padStart(2, "0");
+    }
+
+    atualizarContagem();
+    setInterval(atualizarContagem, 1000);
+  </script>
+</body>
+</html>
