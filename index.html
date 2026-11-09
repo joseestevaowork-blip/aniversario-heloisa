@@ -39,6 +39,26 @@
 
     .page { width: 100%; max-width: 560px; }
 
+.intro {
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.intro::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image: url("assets/images/heloisa-fundo.jpg");
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+
+    opacity: 0.20;
+    z-index: -1;
+    pointer-events: none;
+}    
+    
     .intro {
       position: fixed;
       inset: 0;
